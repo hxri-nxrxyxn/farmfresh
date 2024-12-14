@@ -32,6 +32,15 @@ type users struct {
 	User_type string `json:"user_type"`
 }
 
-
-
-
+type products struct {
+	Product_id int `json:"product_id"`
+	Farmer_id int `json:"farmer_id"`
+	Product_name string `json:"product_name"`
+	Product_description string `json:"product_description"`
+	Category string `json:"category"`
+	Quantity int `json:"quantity"`
+	Price float64 `json:"price"`
+	Image_url string `json:"image_url"`
+	Location string `json:"location"`
+	Status string `json:"status"`
+}
