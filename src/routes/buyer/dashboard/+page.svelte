@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import ChevronLeft from "lucide-svelte/icons/chevron-left";
     import ChevronRight from "lucide-svelte/icons/chevron-right";
     import Copy from "lucide-svelte/icons/copy";
@@ -204,14 +204,6 @@
                     <Breadcrumb.Item>
                         <Breadcrumb.Link href="##">Dashboard</Breadcrumb.Link>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Separator />
-                    <Breadcrumb.Item>
-                        <Breadcrumb.Link href="##">Orders</Breadcrumb.Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Separator />
-                    <Breadcrumb.Item>
-                        <Breadcrumb.Page>Recent Orders</Breadcrumb.Page>
-                    </Breadcrumb.Item>
                 </Breadcrumb.List>
             </Breadcrumb.Root>
             <div class="relative ml-auto flex-1 md:grow-0">
@@ -251,64 +243,21 @@
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
         </header>
+        <div class="gap-4 p-4 flex m-auto font-semibold text-4xl">
+            <h1 class="p-4">Buy your fruits and vegetables at affordable rates, right from the farmers</h1>
+        </div>
         <main
-            class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3"
+            class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 "
         >
             <div
                 class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2"
             >
-                <div
-                    class="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4"
-                >
-                    <Card.Root class="sm:col-span-2">
-                        <Card.Header class="pb-3">
-                            <Card.Title>Your Orders</Card.Title>
-                            <Card.Description
-                                class="max-w-lg text-balance leading-relaxed"
-                            >
-                                Introducing Our Dynamic Orders Dashboard for
-                                Seamless Management and Insightful Analysis.
-                            </Card.Description>
-                        </Card.Header>
-                        <Card.Footer>
-                            <Button>Create New Order</Button>
-                        </Card.Footer>
-                    </Card.Root>
-                    <Card.Root>
-                        <Card.Header class="pb-2">
-                            <Card.Description>This Week</Card.Description>
-                            <Card.Title class="text-4xl">$1329</Card.Title>
-                        </Card.Header>
-                        <Card.Content>
-                            <div class="text-muted-foreground text-xs">
-                                +25% from last week
-                            </div>
-                        </Card.Content>
-                        <Card.Footer>
-                            <Progress value={25} aria-label="25% increase" />
-                        </Card.Footer>
-                    </Card.Root>
-                    <Card.Root>
-                        <Card.Header class="pb-2">
-                            <Card.Description>This Month</Card.Description>
-                            <Card.Title class="text-3xl">$5,329</Card.Title>
-                        </Card.Header>
-                        <Card.Content>
-                            <div class="text-muted-foreground text-xs">
-                                +10% from last month
-                            </div>
-                        </Card.Content>
-                        <Card.Footer>
-                            <Progress value={12} aria-label="12% increase" />
-                        </Card.Footer>
-                    </Card.Root>
-                </div>
-                <Tabs.Root value="week">
+                
+                <Tabs.Root value="products">
                     <div class="flex items-center">
                         <Tabs.List>
-                            <Tabs.Trigger value="week">Week</Tabs.Trigger>
-                            <Tabs.Trigger value="month">Month</Tabs.Trigger>
-                            <Tabs.Trigger value="year">Year</Tabs.Trigger>
+                            <Tabs.Trigger value="products">Products</Tabs.Trigger>
+                            <Tabs.Trigger value="recents">Recents</Tabs.Trigger>
                         </Tabs.List>
                         <div class="ml-auto flex items-center gap-2">
                             <DropdownMenu.Root>
@@ -341,21 +290,25 @@
                                     >
                                 </DropdownMenu.Content>
                             </DropdownMenu.Root>
-                            <Button
-                                size="sm"
-                                variant="outline"
-                                class="h-7 gap-1 text-sm"
-                            >
-                                <File class="h-3.5 w-3.5" />
-                                <span class="sr-only sm:not-sr-only"
-                                    >Export</span
-                                >
-                            </Button>
                         </div>
                     </div>
-                    <Tabs.Content value="week"></Tabs.Content>
-                    <Tabs.Content value="month"></Tabs.Content>
-                    <Tabs.Content value="year"></Tabs.Content>
+                    <Tabs.Content value="recents">
+
+                    </Tabs.Content>
+                    <Tabs.Content value="products">
+                        <Card.Root class="lg:w-1/4">
+                            <img src="https://africaviewfacts.com/media/stats/img/intro-1669128426.jpg" alt="coco" class="rounded-tl rounded-tr">
+                          <Card.Header>
+                            <Card.Title>Coconut</Card.Title>
+                            <Card.Description>Checkout high quality coconuts in your area!</Card.Description>
+                          </Card.Header>
+                          <Card.Content>
+                          </Card.Content>
+                          <Card.Footer>
+                            <Button variant="outline">Buy Now</Button>
+                          </Card.Footer>
+                        </Card.Root>
+                    </Tabs.Content>
                 </Tabs.Root>
             </div>
         </main>
