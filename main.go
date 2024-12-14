@@ -52,3 +52,11 @@ type orders struct {
 	Total_amount float64 `json:"total_amount"`
 	Status string `json:"status"`
 }
+
+type order_items struct {
+	Order_item_id int `json:"order_item_id"`
+	Order_id int `json:"order_id"`
+	Product_id int `json:"product_id"`
+	Quantity int `json:"quantity"`
+	Unit_price float64 `json:"unit_price"`
+}
