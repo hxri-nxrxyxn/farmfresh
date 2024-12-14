@@ -30,7 +30,7 @@ let error = null;
 
 async function fetchData() {
   try {
-    const response = await fetch('http://192.168.10.140:8080/v1/products');
+    const response = await fetch('http://192.168.240.140:8080/v1/products', {mode: "no-cors"});
     data = await response.json();
     console.log(data)
   } catch (err) {
@@ -229,8 +229,8 @@ onMount(fetchData);
 <Tabs.Root value="sell">
                     <div class="flex items-center">
                         <Tabs.List>
-                            <Tabs.Trigger value="sell">Sell</Tabs.Trigger>
-                            <Tabs.Trigger value="buy">Buy</Tabs.Trigger>
+                            <Tabs.Trigger value="buy">Sell</Tabs.Trigger>
+                            <Tabs.Trigger value="sell">Buy</Tabs.Trigger>
                         </Tabs.List>
                         <div class="ml-auto flex items-center gap-2">
                             <DropdownMenu.Root>
@@ -313,7 +313,7 @@ onMount(fetchData);
               <Card.Header>
                 <Card.Title>Products</Card.Title>
                 <Card.Description>
-                  Manage your products and view their sales performance.
+                  Update your products here
                 </Card.Description>
               </Card.Header>
               <Card.Content>

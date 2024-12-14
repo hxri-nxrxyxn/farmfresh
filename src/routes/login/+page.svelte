@@ -244,7 +244,7 @@
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
         </header>
-  <Card.Root class="mx-auto max-w-sm">
+  <Card.Root class="mx-auto max-w-sm m-4">
     <Card.Header>
       <Card.Title class="text-xl">Sign In</Card.Title>
       <Card.Description>Please login with your credentials.</Card.Description>

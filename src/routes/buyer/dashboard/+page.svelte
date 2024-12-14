@@ -296,7 +296,8 @@
 
                     </Tabs.Content>
                     <Tabs.Content value="products">
-                        <Card.Root class="lg:w-1/4">
+                       <div class="lg:flex gap-4">
+<Card.Root class="lg:w-1/4">
                             <img src="https://africaviewfacts.com/media/stats/img/intro-1669128426.jpg" alt="coco" class="rounded-tl rounded-tr">
                           <Card.Header>
                             <Card.Title>Coconut</Card.Title>
@@ -307,7 +308,42 @@
                           <Card.Footer>
                             <Button variant="outline">Buy Now</Button>
                           </Card.Footer>
+                        </Card.Root><Card.Root class="lg:w-1/4">
+                            <img src="https://ichef.bbci.co.uk/images/ic/480xn/p07v2wjn.jpg.webp" alt="coco" class="rounded-tl rounded-tr">
+                          <Card.Header>
+                            <Card.Title>Apple</Card.Title>
+                            <Card.Description>Get your red apples today</Card.Description>
+                          </Card.Header>
+                          <Card.Content>
+                          </Card.Content>
+                          <Card.Footer>
+                            <Button variant="outline">Buy Now</Button>
+                          </Card.Footer>
+                        </Card.Root><Card.Root class="lg:w-1/4">
+                            <img src="https://www.health.com/thmb/4CdxwkcePxrn-bUOLaKsd1ThRm4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TypesOfOranges-f95153e786554ba5b6da0370387ee563.jpg" alt="coco" class="rounded-tl rounded-tr">
+                          <Card.Header>
+                            <Card.Title>Orange</Card.Title>
+                            <Card.Description>Oranges Oranges</Card.Description>
+                          </Card.Header>
+                          <Card.Content>
+                          </Card.Content>
+                          <Card.Footer>
+                            <Button variant="outline">Buy Now</Button>
+                          </Card.Footer>
                         </Card.Root>
+                        <Card.Root class="lg:w-1/4">
+                            <img src="https://cdn.britannica.com/59/139059-050-30794D53/Guava-fruit.jpg" alt="coco" class="rounded-tl rounded-tr">
+                          <Card.Header>
+                            <Card.Title>Guava</Card.Title>
+                            <Card.Description>placeholder</Card.Description>
+                          </Card.Header>
+                          <Card.Content>
+                          </Card.Content>
+                          <Card.Footer>
+                            <Button variant="outline">Buy Now</Button>
+                          </Card.Footer>
+                        </Card.Root>
+                       </div> 
                     </Tabs.Content>
                 </Tabs.Root>
             </div>

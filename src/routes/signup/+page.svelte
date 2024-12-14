@@ -244,7 +244,7 @@
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
         </header>
-  <Card.Root class="mx-auto max-w-sm">
+  <Card.Root class="mx-auto max-w-sm m-4">
     <Card.Header>
       <Card.Title class="text-xl">Sign Up</Card.Title>
       <Card.Description>Enter your information to create an account</Card.Description>
