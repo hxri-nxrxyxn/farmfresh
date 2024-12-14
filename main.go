@@ -4,11 +4,20 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/joho/godotenv"
 	"net/http"
 	"os"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
+	_ "github.com/joho/godotenv"
 )
+
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
+}
 
 func connect_database() (*sql.DB, error) {
 	connect := os.Getenv("CONNECT")
