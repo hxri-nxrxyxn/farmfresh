@@ -60,3 +60,17 @@ type order_items struct {
 	Quantity int `json:"quantity"`
 	Unit_price float64 `json:"unit_price"`
 }
+
+func register(db *sql.DB,w http.ResponseWriter, r *http.Request) {
+	var newuser users
+	register_query = os.Getenv("REGISTER_QUERY")
+	err := json.NewDecoder(r.Body).Decode(&newuser)
+	if err != nil {
+		panic(err)
+	}
+	_,err = db.Exec(register_query, newuser.Username, newuser.Password,newuser.First_name,newuser.Last_name,newuser.Email,newuser.Phone,newuser.Address,newuser.User_type)
+	if err != nil {
+		panic(err)
+	}
+}
+
