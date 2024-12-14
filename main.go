@@ -83,6 +83,25 @@ func register(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func login(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+	var credentials users
+	var stored_password string
+	login_query := os.Getenv("LOGIN_QUERY")
+	err := json.NewDecoder(r.Body).Decode(&credentials)
+	if err != nil {
+		panic(err)
+	}
+	err = db.QueryRow(login_query, credentials.Username).Scan(&stored_password)
+	if err != nil {
+		http.Error(w, "Unknown User", http.StatusNotFound)
+	}
+	if stored_password == credentials.Password {
+		w.WriteHeader(http.StatusOK)
+	} else {
+		w.WriteHeader((http.StatusUnauthorized))
+	}
+}
+
 func main() {
 	db, err := connect_database()
 	if err != nil {
@@ -90,6 +109,9 @@ func main() {
 	}
 	http.HandleFunc("/v1/users/register", func(w http.ResponseWriter, r *http.Request) {
 		register(db, w, r)
+	})
+	http.HandleFunc("/v1/users/login", func(w http.ResponseWriter, r *http.Request) {
+		login(db, w, r)
 	})
 	http.ListenAndServe(":8080", nil)
 }
