@@ -12,7 +12,8 @@ import (
 
 
 connect_database() (*sql.DB,error) {
-	db, err := sql.Query("mysql","root:goolag@(localhost:8080)/farmfresh")
+	connect = os.Getenv("CONNECT")
+	db, err := sql.Query("mysql",connect)
 	if err != NIL {
 		panic(err)
 	}
@@ -74,3 +75,14 @@ func register(db *sql.DB,w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func main() {
+	db, err := connect_database()
+	if err != nil {
+		panic(err)
+	}
+	http.HandleFunc("/v1/users/register", func(w http.ResponseWriter, r *http.Request) {
+		register(db,w,r)
+	})
+	http.ListenAndServe((":8080",nil))
+	
+}
