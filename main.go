@@ -44,3 +44,11 @@ type products struct {
 	Location string `json:"location"`
 	Status string `json:"status"`
 }
+
+type orders struct {
+	Order_id int `json:"order_id"`
+	Buyer_id int `json:"buyer_id"`
+	Order_date int `json:"order_date"`
+	Total_amount float64 `json:"total_amount"`
+	Status string `json:"status"`
+}
