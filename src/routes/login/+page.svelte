@@ -254,9 +254,10 @@
         <div class="grid grid-cols-2 gap-4">
         </div>
         <div class="grid gap-2">
-          <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Label for="phone">Phone</Label>
+          <Input id="email" type="email" placeholder="+91 99952838385" required />
         </div>
+        <Button type="button" style="background: #ccc; color: white; border: 1px solid #ddd">Send OTP</Button>
         <div class="grid gap-2">
           <Label for="password">Password</Label>
           <Input id="password" type="password" />

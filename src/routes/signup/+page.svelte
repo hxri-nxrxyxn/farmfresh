@@ -254,16 +254,26 @@
         <div class="grid grid-cols-2 gap-4">
           <div class="grid gap-2">
             <Label for="first-name">First name</Label>
-            <Input id="first-name" placeholder="Max" required />
+            <Input id="first-name" placeholder="Hari" required />
           </div>
           <div class="grid gap-2">
             <Label for="last-name">Last name</Label>
-            <Input id="last-name" placeholder="Robinson" required />
+            <Input id="last-name" placeholder="Narayan" required />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="grid gap-2">
+            <Label for="first-name">Farmer ID</Label>
+            <Input id="first-name" placeholder="44447787" required />
+          </div>
+          <div class="grid gap-2">
+            <Label for="last-name">Location</Label>
+            <Input id="last-name" placeholder="New Delhi" required />
           </div>
         </div>
         <div class="grid gap-2">
-          <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Label for="phone">Phone</Label>
+          <Input id="email" type="phone" placeholder="+91 9995283835" required />
         </div>
         <div class="grid gap-2">
           <Label for="password">Password</Label>

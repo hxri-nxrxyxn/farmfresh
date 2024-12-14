@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import File from "lucide-svelte/icons/file";
     import House from "lucide-svelte/icons/house";
     import ChartLine from "lucide-svelte/icons/chart-line";
@@ -23,37 +23,41 @@
     import * as Table from "$lib/components/ui/table/index.js";
     import * as Tabs from "$lib/components/ui/tabs/index.js";
     import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+    import { onMount } from 'svelte';
+
+let data = null;
+let error = null;
+
+async function fetchData() {
+  try {
+    const response = await fetch('http://192.168.10.140:8080/v1/products');
+    data = await response.json();
+    console.log(data)
+  } catch (err) {
+    error = err;
+  }
+}
+
+onMount(fetchData);
+
   </script>
   
   <div class="bg-muted/40 flex min-h-screen w-full flex-col">
     <aside class="bg-background fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r sm:flex">
       <nav class="flex flex-col items-center gap-4 px-2 sm:py-5">
         <a
-          href="##"
+          href="/farmer/dashboard"
           class="bg-primary text-primary-foreground group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:h-8 md:w-8 md:text-base"
         >
           <Package2 class="h-4 w-4 transition-all group-hover:scale-110" />
           <span class="sr-only">Acme Inc</span>
         </a>
+        
         <Tooltip.Root>
           <Tooltip.Trigger asChild let:builder>
             <a
-              href="##"
-              class="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
-              use:builder.action
-              {...builder}
-            >
-              <House class="h-5 w-5" />
-              <span class="sr-only">Dashboard</span>
-            </a>
-          </Tooltip.Trigger>
-          <Tooltip.Content side="right">Dashboard</Tooltip.Content>
-        </Tooltip.Root>
-        <Tooltip.Root>
-          <Tooltip.Trigger asChild let:builder>
-            <a
-              href="##"
-              class="bg-accent text-accent-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
+              href="hey"
+              class="hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
               use:builder.action
               {...builder}
             >
@@ -221,7 +225,48 @@
         </DropdownMenu.Root>
       </header>
       <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-        <Tabs.Root value="all">
+        
+<Tabs.Root value="sell">
+                    <div class="flex items-center">
+                        <Tabs.List>
+                            <Tabs.Trigger value="sell">Sell</Tabs.Trigger>
+                            <Tabs.Trigger value="buy">Buy</Tabs.Trigger>
+                        </Tabs.List>
+                        <div class="ml-auto flex items-center gap-2">
+                            <DropdownMenu.Root>
+                                <DropdownMenu.Trigger asChild let:builder>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        class="h-7 gap-1 text-sm"
+                                        builders={[builder]}
+                                    >
+                                        <ListFilter class="h-3.5 w-3.5" />
+                                        <span class="sr-only sm:not-sr-only"
+                                            >Filter</span
+                                        >
+                                    </Button>
+                                </DropdownMenu.Trigger>
+                                <DropdownMenu.Content align="end">
+                                    <DropdownMenu.Label
+                                        >Filter by</DropdownMenu.Label
+                                    >
+                                    <DropdownMenu.Separator />
+                                    <DropdownMenu.CheckboxItem checked>
+                                        Fulfilled
+                                    </DropdownMenu.CheckboxItem>
+                                    <DropdownMenu.CheckboxItem
+                                        >Declined</DropdownMenu.CheckboxItem
+                                    >
+                                    <DropdownMenu.CheckboxItem
+                                        >Refunded</DropdownMenu.CheckboxItem
+                                    >
+                                </DropdownMenu.Content>
+                            </DropdownMenu.Root>
+                        </div>
+                    </div>
+                    <Tabs.Content value="buy">
+<Tabs.Root value="all">
           <div class="flex items-center">
             
             <div class="ml-auto flex items-center gap-2">
@@ -290,205 +335,7 @@
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    <Table.Row>
-                      <Table.Cell class="hidden sm:table-cell">
-                        <img
-                          alt="Product example"
-                          class="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/images/placeholder.svg"
-                          width="64"
-                        />
-                      </Table.Cell>
-                      <Table.Cell class="font-medium">
-                        hi
-                      </Table.Cell>
-                      <Table.Cell>
-                        <Badge variant="outline">Available</Badge>
-                      </Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">
-                        $499.99
-                      </Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">25</Table.Cell>
-                      <Table.Cell>
-                        <DropdownMenu.Root>
-                          <DropdownMenu.Trigger asChild let:builder>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                              builders={[builder]}
-                            >
-                              <Ellipsis class="h-4 w-4" />
-                              <span class="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenu.Trigger>
-                          <DropdownMenu.Content align="end">
-                            <DropdownMenu.Label>Actions</DropdownMenu.Label>
-                            <DropdownMenu.Item>Edit</DropdownMenu.Item>
-                            <DropdownMenu.Item>Delete</DropdownMenu.Item>
-                          </DropdownMenu.Content>
-                        </DropdownMenu.Root>
-                      </Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Cell class="hidden sm:table-cell">
-                        <img
-                          alt="Product"
-                          class="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/images/placeholder.svg"
-                          width="64"
-                        />
-                      </Table.Cell>
-                      <Table.Cell class="font-medium">
-                        hey
-                      </Table.Cell>
-                      <Table.Cell>
-                        <Badge variant="outline">Available</Badge>
-                      </Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">
-                        $129.99
-                      </Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">100</Table.Cell>
-                      <Table.Cell>
-                        <DropdownMenu.Root>
-                          <DropdownMenu.Trigger asChild let:builder>
-                            <Button
-                              builders={[builder]}
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <Ellipsis class="h-4 w-4" />
-                              <span class="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenu.Trigger>
-                          <DropdownMenu.Content align="end">
-                            <DropdownMenu.Label>Actions</DropdownMenu.Label>
-                            <DropdownMenu.Item>Edit</DropdownMenu.Item>
-                            <DropdownMenu.Item>Delete</DropdownMenu.Item>
-                          </DropdownMenu.Content>
-                        </DropdownMenu.Root>
-                      </Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Cell class="hidden sm:table-cell">
-                        <img
-                          alt="Product"
-                          class="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/images/placeholder.svg"
-                          width="64"
-                        />
-                      </Table.Cell>
-                      <Table.Cell class="font-medium">
-                        hoo
-                      </Table.Cell>
-                      <Table.Cell>
-                        <Badge variant="outline">Active</Badge>
-                      </Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">$39.99</Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">50</Table.Cell>
-                      <Table.Cell>
-                        <DropdownMenu.Root>
-                          <DropdownMenu.Trigger asChild let:builder>
-                            <Button
-                              builders={[builder]}
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <Ellipsis class="h-4 w-4" />
-                              <span class="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenu.Trigger>
-                          <DropdownMenu.Content align="end">
-                            <DropdownMenu.Label>Actions</DropdownMenu.Label>
-                            <DropdownMenu.Item>Edit</DropdownMenu.Item>
-                            <DropdownMenu.Item>Delete</DropdownMenu.Item>
-                          </DropdownMenu.Content>
-                        </DropdownMenu.Root>
-                      </Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Cell class="hidden sm:table-cell">
-                        <img
-                          alt="Product"
-                          class="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/images/placeholder.svg"
-                          width="64"
-                        />
-                      </Table.Cell>
-                      <Table.Cell class="font-medium">
-                        this is an appple
-                      </Table.Cell>
-                      <Table.Cell>
-                        <Badge variant="secondary">Draft</Badge>
-                      </Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">$2.99</Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">0</Table.Cell>
-                      <Table.Cell>
-                        <DropdownMenu.Root>
-                          <DropdownMenu.Trigger asChild let:builder>
-                            <Button
-                              builders={[builder]}
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <Ellipsis class="h-4 w-4" />
-                              <span class="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenu.Trigger>
-                          <DropdownMenu.Content align="end">
-                            <DropdownMenu.Label>Actions</DropdownMenu.Label>
-                            <DropdownMenu.Item>Edit</DropdownMenu.Item>
-                            <DropdownMenu.Item>Delete</DropdownMenu.Item>
-                          </DropdownMenu.Content>
-                        </DropdownMenu.Root>
-                      </Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Cell class="hidden sm:table-cell">
-                        <img
-                          alt="Product"
-                          class="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/images/placeholder.svg"
-                          width="64"
-                        />
-                      </Table.Cell>
-                      <Table.Cell class="font-medium">
-                        this will be filled with apple portals
-                      </Table.Cell>
-                      <Table.Cell>
-                        <Badge variant="outline">Unavailable</Badge>
-                      </Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">$59.99</Table.Cell>
-                      <Table.Cell class="hidden md:table-cell">75</Table.Cell>
-                      <Table.Cell>
-                        <DropdownMenu.Root>
-                          <DropdownMenu.Trigger asChild let:builder>
-                            <Button
-                              builders={[builder]}
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <Ellipsis class="h-4 w-4" />
-                              <span class="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenu.Trigger>
-                          <DropdownMenu.Content align="end">
-                            <DropdownMenu.Label>Actions</DropdownMenu.Label>
-                            <DropdownMenu.Item>Edit</DropdownMenu.Item>
-                            <DropdownMenu.Item>Delete</DropdownMenu.Item>
-                          </DropdownMenu.Content>
-                        </DropdownMenu.Root>
-                      </Table.Cell>
-                    </Table.Row>
+                        
                     <Table.Row>
                       <Table.Cell class="hidden sm:table-cell">
                         <img
@@ -541,6 +388,22 @@
             </Card.Root>
           </Tabs.Content>
         </Tabs.Root>
+                    </Tabs.Content>
+                    <Tabs.Content value="sell">
+                        <Card.Root class="lg:w-1/4">
+                            <img src="https://africaviewfacts.com/media/stats/img/intro-1669128426.jpg" alt="coco" class="rounded-tl rounded-tr">
+                          <Card.Header>
+                            <Card.Title>Coconut</Card.Title>
+                            <Card.Description>Checkout high quality coconuts in your area!</Card.Description>
+                          </Card.Header>
+                          <Card.Content>
+                          </Card.Content>
+                          <Card.Footer>
+                            <Button variant="outline">Buy Now</Button>
+                          </Card.Footer>
+                        </Card.Root>
+                    </Tabs.Content>
+                </Tabs.Root>
       </main>
     </div>
   </div>
