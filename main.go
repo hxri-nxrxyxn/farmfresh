@@ -42,16 +42,12 @@ type users struct {
 }
 
 type products struct {
-	Product_id          int     `json:"product_id"`
-	Farmer_id           int     `json:"farmer_id"`
-	Product_name        string  `json:"product_name"`
-	Product_description string  `json:"product_description"`
-	Category            string  `json:"category"`
-	Quantity            int     `json:"quantity"`
-	Price               float64 `json:"price"`
-	Image_url           string  `json:"image_url"`
-	Location            string  `json:"location"`
-	Status              string  `json:"status"`
+	Product_id   int     `json:"product_id"`
+	Product_name string  `json:"product_name"`
+	Price        float64 `json:"price"`
+	Image_url    string  `json:"image_url"`
+	Status       string  `json:"status"`
+	Product_life int     `json:"product_life"`
 }
 
 type orders struct {
@@ -102,6 +98,36 @@ func login(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func products_display(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+	products_query := os.Getenv("PRODUCTS_QUERY")
+	rows, err := db.Query(products_query)
+	if err != nil {
+		panic(err)
+	}
+	var productslist []products
+	for rows.Next() {
+		var pid, plife int
+		var pname, imgurl, status string
+		var price float64
+		err = rows.Scan(&pid, &pname, &price, &imgurl, &status, &plife)
+		if err != nil {
+			panic(err)
+		}
+		productslist = append(productslist, products{
+			Product_id:   pid,
+			Product_name: pname,
+			Price:        price,
+			Image_url:    imgurl,
+			Status:       status,
+			Product_life: plife,
+		})
+	}
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(productslist)
+	defer rows.Close()
+
+}
+
 func main() {
 	db, err := connect_database()
 	if err != nil {
@@ -112,6 +138,9 @@ func main() {
 	})
 	http.HandleFunc("/v1/users/login", func(w http.ResponseWriter, r *http.Request) {
 		login(db, w, r)
+	})
+	http.HandleFunc("/v1/products", func(w http.ResponseWriter, r *http.Request) {
+		products_display(db, w, r)
 	})
 	http.ListenAndServe(":8080", nil)
 }
