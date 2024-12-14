@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Dash from "./Dash.svelte";
     import ChevronLeft from "lucide-svelte/icons/chevron-left";
     import ChevronRight from "lucide-svelte/icons/chevron-right";
     import Copy from "lucide-svelte/icons/copy";
